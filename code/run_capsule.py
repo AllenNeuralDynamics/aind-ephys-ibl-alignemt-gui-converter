@@ -54,8 +54,10 @@ if __name__ == "__main__":
         if (data_folder / "postprocessing_pipeline_output_test").is_dir():
             print("\n*******************\n**** TEST MODE ****\n*******************\n")
             postprocessed_folder = data_folder / "postprocessing_pipeline_output_test"
+            spikesorted_folder = data_folder / "spikesorted_pipeline_output_test"
         else:
             postprocessed_folder = data_folder
+            spikesorted_folder = data_folder
     else:
         postprocessed_folder = ecephys_processed_folder / "postprocessed"
     # get recording_names from postprocessing
@@ -74,17 +76,6 @@ if __name__ == "__main__":
 
         # check for LF
         lf_stream_name = stream_name.replace("AP", "LFP")
-
-        if '-LFP' in stream_name:
-            is_lfp = True
-            np2 = False
-            ap_stream_name = stream_name.replace("LFP", "AP")
-        elif '-AP' in stream_name:
-            is_lfp = False
-            ap_stream_name = stream_name
-        else: # Neuropixels 2.0
-            is_lfp = True
-            ap_stream_name = stream_name
             
         waveform_folder = postprocessed_folder / recording_name            
         we_recless = si.load_waveforms(
